@@ -1,0 +1,258 @@
+.mbtiLayout{
+    font-size:14px;
+    background-color:white;
+    height: calc(var(--vh,1vh)*100);
+  }
+  
+  .startPageLayout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .banner{
+    width: 100%;
+    height: 400px;
+    background-color: #FFCED1;  
+  }
+  .bannerText{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-left: 150px;
+  }
+  .bannerText2{
+    font-size: 20px;
+    margin-left: 150px;
+    margin-top: 22px;
+  }
+  .testLayout{
+    text-align: center;
+    margin-top: 58px;
+  }
+  
+  .testTitle{
+    font-size: 30px;
+    font-weight: bold;
+  
+    margin-bottom: 33px;
+  }
+  
+  /*구독 유형 검사하기*/
+  .startButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    height: 72px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 70px;
+    background-color: #67A2D8;
+    color: white;
+  }
+  .startButton:hover {
+    border: none;
+    color: white;
+    cursor: pointer; /* 커서 모양 변경 (선택 사항) */
+  }
+  .countLayout{
+    text-align: center;
+    margin-top: 58px;
+  }
+  .countTitle{
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: inset 0 -15px 0 #FFDFE1;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .countNum{
+    font-size: 40px;
+    font-weight: bold;
+  }
+  
+  /*테스트 페이지 전체 레이아웃*/
+  .questionLayout{
+    display: flex;
+    flex-direction: column;
+    background-color:white;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .mbtiTitle div:nth-child(1){
+    display: flex;
+    flex:1;
+  }
+  
+  .questionList{
+    flex-direction: column;
+    height: 100%;
+    overflow: scroll;
+    align-items: center;
+    scrollbar-width: none;
+  }
+  .questionList::-webkit-scrollbar{
+    display: none;
+  }
+  
+  .questionItemLayout{
+    display: flex;
+    flex:1;
+    margin:10px 15px 5px 15px;
+    
+  }
+  /*답변 레이아웃*/
+  .answerItemLayout{
+    margin-top: 77px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+  }
+  
+  
+  /*질문 css*/
+  .chatListLayout{
+    margin-top: 107px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  
+  }
+  
+  .chatBox{
+    max-width: 60vw;
+    margin: 3px 0px 0px 0px;
+    font-size: 40px;
+    font-weight: bold;
+  }
+  
+  
+  
+  .answerBox{
+    background-color: white;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 154px;
+    width: 1000px;
+    text-align: center;
+    border: 4px solid #D8D8D8;
+    margin-bottom: 53px;
+    border-radius: 100px;
+    font-size: 40px;
+    font-weight: bold;
+  }
+  .answerBox {
+    /* 기본 스타일 */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 154px;
+    width: 1000px;
+    text-align: center;
+    border: 4px solid #D8D8D8; /* 기본적으로 투명한 border 설정 */
+    padding: 20px; /* padding 설정 */
+    margin-bottom: 53px;
+    border-radius: 100px;
+    font-size: 40px;
+    font-weight: bold;
+    box-sizing: border-box; /* border와 padding을 요소 크기에 포함시키기 위해 설정 */
+  }
+  
+  .answerBox:hover {
+    /* 마우스를 올렸을 때의 스타일 */
+    background-color: #FFCED1; /* 바뀌는 배경색 */
+    border: none;
+    color: white;
+    cursor: pointer; /* 커서 모양 변경 (선택 사항) */
+  }
+  
+  .progress{
+    width: 763px;
+    height: 41px;
+    margin-top: 45px;
+    background-color: aqua;
+    font-size: 30px;
+    text-align: end;
+    font-weight: 600;
+  }
+  
+  .resultLayout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  
+  .resultTitle{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 42px;
+    margin-top: 89px;
+    color: #FF566A;
+  }
+  .resultImg{
+    width: 190px;
+    height: 190px;
+    background-color: #C1C1C1;
+    border-radius: 32px;
+    margin-bottom: 35px;
+  }
+  .resultName{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 11px;
+  }
+  .resultContent{
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 60px;
+    color: #4F4F4F;
+    white-space: pre-line;
+  }
+  .detailButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    height: 72px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 70px;
+    background-color: #67A2D8;
+    color: white;
+    margin-bottom: 23px;
+  }
+  .retryButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    height: 72px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 70px;
+    background-color: #C1C1C1;
+    color: white;
+  }
+  .detailButton:hover {
+    background-color: #4B93D6; 
+    cursor: pointer; 
+  }
+  .retryButton:hover {
+    background-color: #A3A3A3; 
+    cursor: pointer; 
+  }
