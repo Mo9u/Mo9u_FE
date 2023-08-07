@@ -176,7 +176,7 @@ function Test() {
            <div className='resultName'>{resultName}</div>
            <div className='resultContent'>{resultContent}</div>
            <div className='detailButton'>상세 페이지 바로가기</div>
-           <div onClick={() => setPage(1)} className='retryButton'>다시하기</div>
+           <div onClick={() => setPage(0)} className='retryButton'>다시하기</div>
         </div>
       )}
     </div>
