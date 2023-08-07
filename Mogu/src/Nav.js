@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
+import logo from './img/logo.png';
 
 function Nav() {
   return (
     <div className='navbox'>
-        <div className='logo'></div>
+        <div className='logo'><img src={logo} width = '264px'/></div>
       <nav className='navbar'>
         <ul>
           <li className='navbarMenu'>
