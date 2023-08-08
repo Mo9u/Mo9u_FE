@@ -1,5 +1,5 @@
 .container {
-  margin: 100px 150px 0px 150px;
+  margin: 100px 250px 0px 250px;
   height: 150vh;
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -14,8 +14,10 @@
 }
 
 .sub_category {
-  font-size: 25px;
+  padding-left: 2px;
+  font-size: 30px;
   font-weight: bold;
+  padding-bottom: 10px;
   color: #676767;
 }
 .sub_img img {
@@ -24,12 +26,17 @@
   border-radius: 40px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
+.sub_title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 .sub_info {
   padding-left: 40px;
   padding-top: 10px;
 }
 .sub_summary {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
   color: #676767;
 }
@@ -41,9 +48,16 @@
 }
 
 .tab {
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 35px;
+
   color: #676767;
+}
+.tab_sub {
+  margin-bottom: 30px;
+}
+.tab_sub:nth-child(1) {
+  color: tomato;
+  font-weight: bold;
 }
 .tab_button {
   border: 0;
@@ -140,7 +154,7 @@
   border: 1px solid rgba(255);
   flex-basis: 400px;
   height: 80vh;
-  padding: 20px 35px;
+  padding: 60px 75px;
 }
 .arrow {
   margin-right: 15px;
