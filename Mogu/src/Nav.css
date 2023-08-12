@@ -1,53 +1,48 @@
 /* Nav.css */
 .navbox {
-    display: flex;
-    background-color: white;
-    height: 90px;
+  display: flex;
+  background-color: white;
+  height: 110px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
-.logo{
-    margin-top: 15px;
-    margin-left:148px;
-    width: 264px;
-    height: 57px;
+.logo {
+  margin-top: 30px;
+  margin-left: 250px;
+  width: 264px;
+  height: 57px;
 }
-  
+
 .navbar {
-    margin-left: 370px;
-    align-items: center;
-    display: flex;
-    flex-grow: 1;
-    height: 100%;
-    justify-content: left;
+  margin-left: 370px;
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  justify-content: left;
 }
 ul {
-    list-style-type: none;
-    overflow: hidden;
+  list-style-type: none;
+  overflow: hidden;
 }
 
 li {
-   
-    float:left;
+  float: left;
 }
 li a {
-    display: block;
-    color: #6C6C6C;
-    font-size: 25px;
-    text-align: center;
-    padding-top: 25px;
-    padding-bottom: 30px;
-    padding-left: 40px;
-    padding-right: 40px;
-    text-decoration: none;
-    border-top: 7px solid transparent; /* Add a transparent border by default */
+  display: block;
+  color: #6c6c6c;
+  font-size: 25px;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-decoration: none;
+  border-top: 7px solid transparent; /* Add a transparent border by default */
 }
 
 li a:hover {
-    color: #FF566A;
-    font-weight: bold;
-    border-color: #FF566A; /* Change border color on hover */
+  color: #ff566a;
+  font-weight: bold;
+  border-color: #ff566a; /* Change border color on hover */
 }
-
-
-
-
-
