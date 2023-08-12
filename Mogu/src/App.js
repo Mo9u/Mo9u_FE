@@ -1,19 +1,34 @@
-import './App.css';
-import{BrowserRouter,Routes,Route} from "react-router-dom";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import Test from "./Test";
 import List from "./List";
-
+import Detail from "./Detail";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav/>
+        <Nav />
         <Routes>
-          <Route path="/" element={<Test />}/>
-          <Route path="/list" element={<><List /></>}/>
-        </Routes>  
+          <Route path="/" element={<Test />} />
+          <Route
+            path="/list"
+            element={
+              <>
+                <List />
+              </>
+            }
+          />
+          <Route
+            path="/detail"
+            element={
+              <>
+                <Detail />
+              </>
+            }
+          />
+        </Routes>
       </div>
     </BrowserRouter>
   );
