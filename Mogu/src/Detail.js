@@ -31,15 +31,27 @@ function Detail(props) {
   const [showSubscriptionTab, setShowSubscriptionTab] = useState(false);
   const [showCancellationTab, setShowCancellationTab] = useState(false);
 
-  if (result.category == "food") {
-    result.category = "음식";
+  let categoryText = "";
+
+  switch (result.category) {
+    case "food":
+      categoryText = "음식";
+      break;
+    case "health":
+      categoryText = "건강";
+      break;
+    case "culture":
+      categoryText = "생활 / 편의";
+      break;
+    default:
+      categoryText = "기타";
   }
   return (
     <div className="container">
       <div className="main">
         <div className="sub_category">
           <span>
-            카테고리 {">"} {result.category}
+            카테고리 {">"} {categoryText}
           </span>
         </div>
         <div className="sub_container">
@@ -64,7 +76,7 @@ function Detail(props) {
             <ul>
               <li className="sub_navbarMenu">
                 <button
-                  className="tab_button"
+                  className={`tab_button ${showInfoTab ? "active" : ""}`}
                   onClick={() => {
                     setShowInfoTab(true);
                     setShowSubscriptionTab(false);
@@ -76,7 +88,9 @@ function Detail(props) {
               </li>
               <li className="sub_navbarMenu">
                 <button
-                  className="tab_button"
+                  className={`tab_button ${
+                    showSubscriptionTab ? "active" : ""
+                  }`}
                   onClick={() => {
                     setShowInfoTab(false);
                     setShowSubscriptionTab(true);
@@ -88,7 +102,9 @@ function Detail(props) {
               </li>
               <li className="sub_navbarMenu">
                 <button
-                  className="tab_button"
+                  className={`tab_button ${
+                    showCancellationTab ? "active" : ""
+                  }`}
                   onClick={() => {
                     setShowInfoTab(false);
                     setShowSubscriptionTab(false);
@@ -104,21 +120,43 @@ function Detail(props) {
             {showInfoTab && (
               <div className="tab">
                 {result.mainContent?.map((i, idx) => (
-                  <div className="tab_sub">{i}</div>
+                  <div className="tab_sub">
+                    {idx + 1}. {i}
+                  </div>
                 ))}
               </div>
             )}
             {showSubscriptionTab && (
               <div className="tab">
-                {result.howSubExplain.map((i) => (
-                  <div className="tab_sub">{i}</div>
+                {result.howSubExplain.map((explain, idx) => (
+                  <div className="tab_sub" key={idx}>
+                    <div className="text_box">
+                      {idx + 1}. {explain}
+                    </div>
+                    <div className="img_box">
+                      <img
+                        src={result.howSubImg[idx]}
+                        alt={`How to Sub ${idx}`}
+                      />
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
             {showCancellationTab && (
               <div className="tab">
-                {result.howExitExplain.map((i) => (
-                  <div className="tab_sub">{i}</div>
+                {result.howExitExplain.map((exit, idx) => (
+                  <div className="tab_sub" key={idx}>
+                    <div className="text_box">
+                      {idx + 1}. {exit}
+                    </div>
+                    <div className="img_box">
+                      <img
+                        src={result.howExitImg[idx]}
+                        alt={`How to Sub ${idx}`}
+                      />
+                    </div>
+                  </div>
                 ))}
               </div>
             )}

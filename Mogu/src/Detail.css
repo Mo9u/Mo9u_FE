@@ -32,7 +32,6 @@
   margin-bottom: 10px;
 }
 .sub_info {
-
   padding-top: 10px;
 }
 .sub_summary {
@@ -43,18 +42,21 @@
   margin-top: 50px;
 }
 
-
+.img_box img {
+  width: 1200px;
+  height: 500px;
+  object-fit: scale-down;
+  margin-top: 30px;
+}
 .tab {
   font-size: 35px;
   color: #676767;
 }
 .tab_sub {
   margin-bottom: 30px;
-}
-.tab_sub:nth-child(1) {
-  color: #FF5678;
   font-weight: bold;
 }
+
 .tab_button {
   border: 0;
   outline: 0;
@@ -67,17 +69,19 @@
   padding-left: 40px;
   padding-right: 40px;
   text-decoration: none;
-  border-bottom: 2px solid #A9A9A9;
+  border-bottom: 2px solid #a9a9a9;
+  font-weight: bold;
 }
-.tab_button:active {
-  color: #FF5678;
-  border-color: #FF5678;
-  
+.tab_button.active {
+  color: #ff5678;
+  border-color: #ff5678;
+  font-weight: bold;
 }
 
 .tab_button:hover {
-  color: #FF5678;
-  border-color: #FF5678;
+  color: #ffb0c0;
+  border-color: #ffb0c0;
+  font-weight: bold;
 }
 
 .side_bar {
@@ -105,7 +109,7 @@
 .price_title {
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
-  color: #FF5678;
+  color: #ff5678;
   font-size: 30px;
   font-weight: bolder;
 }
@@ -128,7 +132,7 @@
   font-weight: bold;
   text-decoration: none;
   color: #ffffff;
-  background-color: #FF5678;
+  background-color: #ff5678;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -152,7 +156,7 @@
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255);
   flex-basis: 400px;
-  height: 80vh;
+
   padding: 60px 75px;
 }
 .arrow {
@@ -171,5 +175,3 @@
   font-size: 25px;
   padding: 10px;
 }
-
-
