@@ -24,71 +24,71 @@ function Test() {
   const questionList = [
     //IE질문
     {
-      q: ["내일 먹을 버섯 전골에 들어갈", "채소를 사야할 때 나는?"],
+      q: ["휴가로 가고 싶은 휴양지는?"],
       a: [
-        { type: "I", text: "‘나가기 귀찮아...’ 인터넷으로 주문한다" },
-        { type: "E", text: "오랜만에 바람도 쐴 겸 마트에 간다" },
+        { type: "I", text: "조용하고 한적한 곳" },
+        { type: "E", text: "사람이 많이 오는 유명한 관광지" },
       ],
     },
     {
-      q: ["너 이번주에 엄청 바빴다며", "주말에 뭐해?"],
+      q: ["나는 보통 에너지를"],
       a: [
-        { type: "I", text: "너무 힘들었어 ㅜㅜㅜ 집에서 쉬어야지" },
-        { type: "E", text: "바빠서 못놀았어 ㅜㅜ 나가 놀아야지" },
+        { type: "I", text: "개인적인 활동으로 얻는다." },
+        { type: "E", text: "사람들과 함께 시간을 보낼 때 얻는다" },
       ],
     },
     {
-      q: ["자주 가는 카페 사장님이 아는척을 했다", ""],
+      q: ["새로운 사람들과 만날 때"],
       a: [
-        { type: "I", text: "(이제 그만 와야지)" },
-        { type: "E", text: "(더 자주 와야지)" },
+        { type: "I", text: "말을 먼저 걸어주길 기다린다" },
+        { type: "E", text: "먼저 대화를 시작한다" },
       ],
     },
     //TF질문
     {
-      q: ["나 요즘 너무 우울해서", "여행 가려고"],
+      q: ["가족들에게 밥을 해줬을 때 더 듣고 싶은 말은?"],
       a: [
-        { type: "T", text: "어디로 여행가게?" },
+        { type: "T", text: "맛있다. 다음에 또 해줘~" },
+        { type: "F", text: "맛있는 밥해줘서 고마워!" },
+      ],
+    },
+    {
+      q: ["가족이 체했다고 했을 때 나는?"],
+      a: [
+        { type: "T", text: "뭐 먹고 체했어?" },
+        { type: "F", text: "괜찮아? 소화제 사올까?" },
+      ],
+    },
+    {
+      q: ["가족이 슬퍼서 밥을 안 먹었다고 하면 나는?"],
+      a: [
+        { type: "T", text: "일단 밥 먼저 먹자!" },
         { type: "F", text: "무슨 일 있어?" },
-      ],
-    },
-    {
-      q: ["슬픔을 나누면 어떻게 될까?"],
-      a: [
-        { type: "T", text: "슬과 픔" },
-        { type: "F", text: "슬픔이 반이 되지" },
-      ],
-    },
-    {
-      q: ["나 시험에서 떨어졌어ㅜㅜ"],
-      a: [
-        { type: "T", text: "무슨 시험 봤는데? 몇점?" },
-        { type: "F", text: "많이 속상하겠다... ㅠㅠ" },
       ],
     },
     //PJ질문
     {
-      q: ["안 읽은 메세지 갯수 몇개야?"],
+      q: ["일을 시작할 때 나는"],
       a: [
-        { type: "P", text: "10개 이상" },
-        { type: "J", text: "0개 ~ 한자리수" },
+        { type: "P", text: "자세한 계획 없이 바로 시작한다" },
+        { type: "J", text: "철저한 계획을 세우고 시작한다" },
       ],
     },
     {
-      q: ["여행 일정 짰어?"],
+      q: ["일상 생활에서 갑작스러운 계획 변경이 있을 때,"],
       a: [
-        { type: "P", text: "ㅇㅇ 국밥 먹고 바다가서 놀다가 카페가자" },
+        { type: "P", text: "즉흥적으로 변화에 적응한다" },
         {
           type: "J",
-          text: "7시 30분 만남, 8시 할매국밥, 9시 유리 박물관, 11시 유리해수욕장, 12시 카페...",
+          text: "미리 세운 일정과 계획을 따라가려고 한다",
         },
       ],
     },
     {
-      q: ["2주 뒤에 시험이다."],
+      q: ["가족들과 외식을 할 때 무엇을 먹을지 나는"],
       a: [
-        { type: "P", text: "시험이 2주나 남았네!" },
-        { type: "J", text: "시험이 2주밖에 안남았네." },
+        { type: "P", text: "일단 만나고 생각한다" },
+        { type: "J", text: "미리 정한다" },
       ],
     },
   ];
@@ -116,6 +116,7 @@ function Test() {
       setMbti();
     }
   };
+  const progress = ((page) / questionList.length) * 100;
 
   const [mbtiContents, setMbtiContents] = useState([]);
 
@@ -165,6 +166,7 @@ function Test() {
     setMbtiContents(mc.filter((val) => val.mbti === mbti)[0]);
   }
 
+ 
   //백 연결
   const baseUrl = "";
 
@@ -235,7 +237,10 @@ function Test() {
                 ))}
               </div>
               <div className="progress">
-                <div>{`${page} / ${questionList.length}`}</div>
+                <div className="progressBar">
+                  <div className="progressFill" style={{ width: `${progress}%` }}></div>
+                </div>
+                <div className="progressNum">{`${page} / ${questionList.length}`}</div>
               </div>
             </div>
           ))}
@@ -249,7 +254,7 @@ function Test() {
           <div className="resultName">{resultName}</div>
           <div className="resultContent">{resultContent}</div>
           <div className="detailButton">
-            <Link to={"/detail"}>상세 페이지 바로가기</Link>
+            <Link to={"/detail"} className="detailLink">상세 페이지 바로가기</Link>
           </div>
           <div onClick={() => setPage(0)} className="retryButton">
             다시하기
