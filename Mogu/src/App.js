@@ -4,6 +4,9 @@ import Nav from "./Nav";
 import Test from "./Test";
 import List from "./List";
 import Detail from "./Detail";
+import Login from "./Login";
+import Join from "./Join";
+import SubList from "./SubList";
 
 function App() {
   return (
@@ -21,10 +24,34 @@ function App() {
             }
           />
           <Route
-            path="/detail"
+            path="/detail/:id"
             element={
               <>
                 <Detail />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Login />
+              </>
+            }
+          />
+          <Route
+            path="/join"
+            element={
+              <>
+                <Join />
+              </>
+            }
+          />
+          <Route
+            path="/sublist"
+            element={
+              <>
+                <SubList />
               </>
             }
           />

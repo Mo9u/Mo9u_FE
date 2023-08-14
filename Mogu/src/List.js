@@ -1,7 +1,7 @@
 import './List.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import pilly from './img/pilly.png';
 
 import { swiperContents } from './swiperContents';
@@ -10,6 +10,8 @@ import SwipePaginationIndex from './SwipePaginationIndex';
 import SwipePaginationButtons from './SwipePaginationButtons';
 
 export default function List() {
+  const navigate = useNavigate();
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // 로드 중... 구현을 위한 것
@@ -125,7 +127,7 @@ export default function List() {
 
     <div className='product-app'>
       <div className='product'>
-          <div className='image'><img src={pilly} width='200px' alt='Pilly'/></div>
+          <div className='image'><Link to="/detail/1"><img src={pilly} width='200px' alt='Pilly'/></Link></div>
           <div className='text'>
               <h2>필리(Pilly)</h2>
               <p>나만의 맞춤영양제</p>

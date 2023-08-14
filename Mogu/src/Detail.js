@@ -15,7 +15,7 @@ function Detail(props) {
   useEffect(() => {
     async function getResult() {
       await axios
-        .get(baseUrl + `/sub/1`)
+        .get(baseUrl + `/sub/${id}`)
         .then((response) => {
           console.log(response.data.result);
           setResult(response.data.result);
