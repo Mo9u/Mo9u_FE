@@ -1,8 +1,8 @@
 import "./Detail.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import up from "./img/Polygon3.png";
-import down from "./img/Polygon4.png";
+import up from "./img/icon/Polygon3.png";
+import down from "./img/icon/Polygon4.png";
 import axios from "axios";
 
 function Detail(props) {
@@ -15,7 +15,7 @@ function Detail(props) {
   useEffect(() => {
     async function getResult() {
       await axios
-        .get(baseUrl + `/sub/1`)
+        .get(baseUrl + `/sub/${id}`)
         .then((response) => {
           console.log(response.data.result);
           setResult(response.data.result);

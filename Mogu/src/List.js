@@ -1,13 +1,17 @@
+import './List.css';
+import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import pilly from './img/pilly.png';
 
 import { swiperContents } from './swiperContents';
 import SwipeItem from './SwipeItem';
 import SwipePaginationIndex from './SwipePaginationIndex';
 import SwipePaginationButtons from './SwipePaginationButtons';
 
-
-import "./List.css";
 export default function List() {
+  const navigate = useNavigate();
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // 로드 중... 구현을 위한 것
@@ -94,6 +98,7 @@ export default function List() {
   }
 
   return (
+    <div>
     <section className="swiper">
       <div className='textLayout' >이런 <span style={{ color: '#67A2D8' }}>서비스</span> 어떤가요?</div>
       <ul className="swipe-items">{content}</ul>
@@ -111,5 +116,34 @@ export default function List() {
         </div>
       </div>
     </section>
+
+    <div className='product-container'>
+    <div className= 'product-category'>
+      <Link to="/health" className="button">건강</Link>
+      <Link to="/food" className="button">음식</Link>
+      <Link to="/convenience" className="button">생활 편의</Link>
+      <Link to="/culture" className="button">문화 콘텐츠</Link>
+      </div>
+
+    <div className='product-app'>
+      <div className='product'>
+          <div className='image'><Link to="/detail/1"><img src={pilly} width='200px' alt='Pilly'/></Link></div>
+          <div className='text'>
+              <h2>필리(Pilly)</h2>
+              <p>나만의 맞춤영양제</p>
+              <p>정기구독</p>
+          </div>
+      </div>
+      <div className='product'>
+          <div className='image'><img src={pilly} width='200px' alt='Dada'/></div>
+          <div className='text'>
+              <h2>다다일상(오설록)</h2>
+              <p>다채롭고 다양한 일상을 위한</p>
+              <p>오설록 만의 특별한 차 구독 서비스</p>
+          </div>
+      </div>
+    </div>
+    </div>
+    </div>
   );
 }

@@ -20,7 +20,7 @@ function Nav() {
             <Link to={"/list"}>구독 서비스 구경하기</Link>
           </li>
           <li className="navbarMenu">
-            <Link to={"/intro"}>나의 구독 관리</Link>
+            <Link to={"/sublist"}>나의 구독 관리</Link>
           </li>
         </ul>
       </nav>
