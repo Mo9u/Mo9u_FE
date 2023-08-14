@@ -21,8 +21,10 @@
   justify-content: left;
 }
 ul {
+  
   list-style-type: none;
   overflow: hidden;
+  padding-inline-start: 0px;
 }
 
 li {
@@ -42,7 +44,7 @@ li a {
 }
 
 li a:hover {
-  color: #ff566a;
+  color: #FF5678;
   font-weight: bold;
-  border-color: #ff566a; /* Change border color on hover */
+  border-color: #FF5678; /* Change border color on hover */
 }

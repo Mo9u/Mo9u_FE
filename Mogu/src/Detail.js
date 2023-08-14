@@ -54,7 +54,7 @@ function Detail(props) {
               <span>다채롭고 다양한 일상을 위한</span>
             </div>
             <div className="sub_summary">
-              <span>오셜록만의 특별한 차 구독 서비스</span>
+              <span>오설록만의 특별한 차 구독 서비스</span>
             </div>
           </div>
         </div>
