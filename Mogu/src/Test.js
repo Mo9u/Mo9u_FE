@@ -21,6 +21,7 @@ function Test() {
 
   const [page, setPage] = useState(0);
 
+  const [mbtiIndex, setMbtiIndex] = useState(0);
   const questionList = [
     //IE질문
     {
@@ -164,31 +165,32 @@ function Test() {
     let mbti = IorE + TorF + PorJ;
 
     setMbtiContents(mc.filter((val) => val.mbti === mbti)[0]);
+
+    const index = mc.findIndex(item => item.mbti === mbti);
+    setMbtiIndex(index + 1);
   }
 
  
   //백 연결
-  const baseUrl = "";
+  const baseUrl = "http://27.96.135.10:8090";
 
-  const [resultImg, setResultImg] = useState();
-  const [resultName, setResultName] = useState("필리");
-  const [resultContent, setResultContent] = useState(
-    "자신감과 건강한 마음을 지닌 당신에게\n몸 건강도 챙길 수 있는 “필리”를 추천합니다."
-  );
+  const [result, setResult] = useState({});
 
-  async function getResult() {
-    await axios
-      .get(baseUrl, { "content-type": "application/json" })
-      .then((response) => {
-        console.log(response.data);
-        setResultImg(response.data.userName);
-        setResultName(response.data.password);
-        setResultContent(response.data.password);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  useEffect(() => {
+    async function getResult() {
+      await axios
+        .get(baseUrl + `/test/0`)
+        .then((response) => {
+          console.log(response.data.result);
+          setResult(response.data.result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    getResult();
+  }, []);
+
   return (
     <div className="mbtiLayout">
       {page === 0 ? (
@@ -251,8 +253,8 @@ function Test() {
         <div className="resultLayout">
           <div className="resultTitle">추천 구독 서비스</div>
           <div className="resultImg"></div>
-          <div className="resultName">{resultName}</div>
-          <div className="resultContent">{resultContent}</div>
+          <div className="resultName">{mbtiContents.mbti}{mbtiIndex}</div>
+          <div className="resultContent">{}</div>
           <div className="detailButton">
             <Link to={"/detail"} className="detailLink">상세 페이지 바로가기</Link>
           </div>
