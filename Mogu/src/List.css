@@ -9,6 +9,9 @@ a:hover {
   cursor: pointer;
 }
 
+.swipe-page-control-button-container button {
+  all: unset;
+}
 
 select {
   all: unset;
