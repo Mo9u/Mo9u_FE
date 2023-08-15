@@ -1,13 +1,19 @@
+import './List.css';
+import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import SubCard from './components/SubCard';
+import pilly from './img/pilly.png';
 
 import { swiperContents } from './swiperContents';
 import SwipeItem from './SwipeItem';
 import SwipePaginationIndex from './SwipePaginationIndex';
 import SwipePaginationButtons from './SwipePaginationButtons';
 
-
-import "./List.css";
 export default function List() {
+  const navigate = useNavigate();
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // 로드 중... 구현을 위한 것
@@ -18,6 +24,12 @@ export default function List() {
   const [currentTimerId, setCurrentTimerId] = useState(-1);
 
   const [play, setPlay] = useState(true);
+
+  const [category, setCategory] = useState('');
+  const categoryList = ["", "health", "food", "culture"];
+  const [subList, setSubList] = useState([]);
+
+  const baseUrl = "http://27.96.135.10:8090";
 
   const maxSlide = swiperContents.length - 1;
 
@@ -93,7 +105,23 @@ export default function List() {
     ));
   }
 
+  const chnCategory = (e) => {
+    setCategory(e.target.id);
+  }
+
+  useEffect(() => {
+    const fetchData = async (e) => {
+      if(subList.length === 0){
+        const response = await axios.get(baseUrl + "/sub/list");
+        console.log(response);
+        setSubList(response.data);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
+    <div>
     <section className="swiper">
       <div className='textLayout' >이런 <span style={{ color: '#67A2D8' }}>서비스</span> 어떤가요?</div>
       <ul className="swipe-items">{content}</ul>
@@ -111,5 +139,24 @@ export default function List() {
         </div>
       </div>
     </section>
+
+    <div className='product-container'>
+      <div className= 'product-category'>
+        <div id="" className={category === "" ? "button_act" : "button"} onClick={chnCategory}>전체</div>
+        <div id="health" className={category === "health" ? "button_act" : "button"} onClick={chnCategory}>건강</div>
+        <div id="food" className={category === "food" ? "button_act" : "button"} onClick={chnCategory}>음식</div>
+        <div id="culture" className={category === "culture" ? "button_act" : "button"} onClick={chnCategory}>편의 · 문화</div>
+      </div>
+      <div className='product-app'>
+        {category === '' 
+          ? subList?.map((e) => (<SubCard data={e}/>))
+          : subList
+              .filter((e) => category === e.category)
+              .map((el) => (<SubCard data={el}/>))
+        
+        }
+      </div>
+    </div>
+    </div>
   );
 }

@@ -1,0 +1,38 @@
+.product {
+    display: flex;
+    align-items: stretch;
+    width: 50%;
+    margin-top: 50px;
+}
+
+.product-category {
+    margin-top: 20px;
+}
+
+.image {
+    margin-right: 20px;
+}
+
+.image img{
+    border-radius: 32px;
+    box-shadow: 5px 5px 10px 5px rgb(197, 197, 197);
+    cursor: pointer;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    color: #000;
+    font-size: 40px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+p {
+    padding: 10px 25px 0 10px;
+    color: #676767;
+    font-size: 30px;
+}
