@@ -2,6 +2,8 @@ import './List.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import SubCard from './components/SubCard';
 import pilly from './img/pilly.png';
 
 import { swiperContents } from './swiperContents';
@@ -22,6 +24,12 @@ export default function List() {
   const [currentTimerId, setCurrentTimerId] = useState(-1);
 
   const [play, setPlay] = useState(true);
+
+  const [category, setCategory] = useState('');
+  const categoryList = ["", "health", "food", "culture"];
+  const [subList, setSubList] = useState([]);
+
+  const baseUrl = "http://27.96.135.10:8090";
 
   const maxSlide = swiperContents.length - 1;
 
@@ -97,6 +105,21 @@ export default function List() {
     ));
   }
 
+  const chnCategory = (e) => {
+    setCategory(e.target.id);
+  }
+
+  useEffect(() => {
+    const fetchData = async (e) => {
+      if(subList.length === 0){
+        const response = await axios.get(baseUrl + "/sub/list");
+        console.log(response);
+        setSubList(response.data);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     <div>
     <section className="swiper">
@@ -118,31 +141,21 @@ export default function List() {
     </section>
 
     <div className='product-container'>
-    <div className= 'product-category'>
-      <Link to="/health" className="button">건강</Link>
-      <Link to="/food" className="button">음식</Link>
-      <Link to="/convenience" className="button">생활 편의</Link>
-      <Link to="/culture" className="button">문화 콘텐츠</Link>
+      <div className= 'product-category'>
+        <div id="" className={category === "" ? "button_act" : "button"} onClick={chnCategory}>전체</div>
+        <div id="health" className={category === "health" ? "button_act" : "button"} onClick={chnCategory}>건강</div>
+        <div id="food" className={category === "food" ? "button_act" : "button"} onClick={chnCategory}>음식</div>
+        <div id="culture" className={category === "culture" ? "button_act" : "button"} onClick={chnCategory}>편의 · 문화</div>
       </div>
-
-    <div className='product-app'>
-      <div className='product'>
-          <div className='image'><Link to="/detail/1"><img src={pilly} width='200px' alt='Pilly'/></Link></div>
-          <div className='text'>
-              <h2>필리(Pilly)</h2>
-              <p>나만의 맞춤영양제</p>
-              <p>정기구독</p>
-          </div>
+      <div className='product-app'>
+        {category === '' 
+          ? subList?.map((e) => (<SubCard data={e}/>))
+          : subList
+              .filter((e) => category === e.category)
+              .map((el) => (<SubCard data={el}/>))
+        
+        }
       </div>
-      <div className='product'>
-          <div className='image'><img src={pilly} width='200px' alt='Dada'/></div>
-          <div className='text'>
-              <h2>다다일상(오설록)</h2>
-              <p>다채롭고 다양한 일상을 위한</p>
-              <p>오설록 만의 특별한 차 구독 서비스</p>
-          </div>
-      </div>
-    </div>
     </div>
     </div>
   );
