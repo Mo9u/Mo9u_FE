@@ -133,12 +133,14 @@ function Detail(props) {
                     <div className="text_box">
                       {idx + 1}. {explain}
                     </div>
-                    <div className="img_box">
-                      <img
-                        src={result.howSubImg[idx]}
-                        alt={`How to Sub ${idx}`}
-                      />
-                    </div>
+                    {result.howSubImg[idx] && ( // Check if image is not null
+                      <div className="img_box">
+                        <img
+                          src={result.howSubImg[idx]}
+                          alt={`How to Sub ${idx}`}
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -150,12 +152,15 @@ function Detail(props) {
                     <div className="text_box">
                       {idx + 1}. {exit}
                     </div>
-                    <div className="img_box">
-                      <img
-                        src={result.howExitImg[idx]}
-                        alt={`How to Sub ${idx}`}
-                      />
-                    </div>
+
+                    {result.howExitImg[idx] && ( // Check if image is not null
+                      <div className="img_box">
+                        <img
+                          src={result.howExitImg[idx]}
+                          alt={`How to Exit ${idx}`}
+                        />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -200,7 +205,9 @@ function Detail(props) {
             </div>
           </div>
           <button className="link_button">
-            <a href={result.link}>구매 바로가기</a>
+            <a href={result.link} target="_blank" rel="noreferrer noopener">
+              구매 바로가기
+            </a>
           </button>
         </div>
       </div>
