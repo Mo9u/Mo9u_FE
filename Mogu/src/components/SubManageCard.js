@@ -19,7 +19,7 @@ function SubManageCard (props){
                 <div className='sublist_sub_date'>매월 {props.data.creditDate[2]}일</div>
                 <div className='sublist_sub_price'>{props.data.creditPrice}원</div>
             </div>
-            <div className='sublist_delBtn'>지우기</div>
+            <div className='sublist_delBtn' id={props.data.id} onClick={props.onDelete}>지우기</div>
         </div>
     );
 }
