@@ -34,7 +34,8 @@ function SubList () {
     useEffect(() => {
         const fetchData = async() => {
             if(subManList.length === 0){
-                axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.sessionID}`;
+                axios.defaults.headers.common["Authorization"] = 
+                    `Bearer ${cookies.sessionID}`;
                 console.log(`Bearer ${cookies.sessionID}`);
                 const response = await axios.get(baseUrl + "/submanages");
                 console.log(response);
