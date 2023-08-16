@@ -192,7 +192,7 @@ input {
 }
 /*부제목 글씨*/
 .swipe-item p {
-  background-color: #67A2D8;
+  font-size: 25px;
 }
 
 .swipe-item img {
