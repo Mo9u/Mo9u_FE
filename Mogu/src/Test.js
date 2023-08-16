@@ -123,14 +123,14 @@ function Test() {
 
   function setMbti() {
     let mc = [
-      { mbti: "ITJ" },
-      { mbti: "ETJ" },
-      { mbti: "ITP" },
-      { mbti: "ETP" },
-      { mbti: "IFJ" },
-      { mbti: "EFJ" },
-      { mbti: "IFP" },
-      { mbti: "EFP" },
+      { mbti: "ITJ"},
+      { mbti: "ETJ"},
+      { mbti: "ITP"},
+      { mbti: "ETP"},
+      { mbti: "IFJ"},
+      { mbti: "EFJ"},
+      { mbti: "IFP"},
+      { mbti: "EFP"},
     ];
     let IorE =
       mbtiList.find(function (data) {
@@ -178,18 +178,32 @@ function Test() {
 
   useEffect(() => {
     async function getResult() {
+      console.log(mbtiIndex);
       await axios
-        .get(baseUrl + `/test/1`)
+        .get(baseUrl + `/test/${mbtiIndex}`)
         .then((response) => {
-          console.log(response.data.result);
-          setResult(response.data.result);
+          console.log(response.data);
+          setResult(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     }
     getResult();
-  }, []);
+  }, [mbtiIndex]);
+
+  // 초기화
+  const initSetting = (e) => {
+    setPage(0);
+    setMbtiList([
+      { name: "I", count: 0 },
+      { name: "E", count: 0 },
+      { name: "T", count: 0 },
+      { name: "F", count: 0 },
+      { name: "P", count: 0 },
+      { name: "J", count: 0 },
+    ]);
+  };
 
   return (
     <div className="mbtiLayout">
@@ -256,13 +270,13 @@ function Test() {
         //mbtiContents.mbti -> itj
         <div className="resultLayout">
           <div className="resultTitle">추천 구독 서비스</div>
-          <div className="resultImg"></div>
-          <div className="resultName">{mbtiContents.mbti}{mbtiIndex}</div>
-          <div className="resultContent">{}</div>
+          <div className="resultImg"><img src={result.mainImage} width="190px" height="190px" style={{'border-radius': '32px'}}/></div>
+          <div className="resultName">{result.name}</div>
+          <div className="resultContent">{result.content}</div>
           <div className="detailButton">
-            <Link to={"/detail"} className="detailLink">상세 페이지 바로가기</Link>
+            <Link to={`/detail/${result.id}`} className="detailLink">상세 페이지 바로가기</Link>
           </div>
-          <div onClick={() => setPage(0)} className="retryButton">
+          <div onClick={initSetting} className="retryButton">
             다시하기
           </div>
         </div>
