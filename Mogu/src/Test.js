@@ -179,7 +179,7 @@ function Test() {
   useEffect(() => {
     async function getResult() {
       await axios
-        .get(baseUrl + `/test/0`)
+        .get(baseUrl + `/test/1`)
         .then((response) => {
           console.log(response.data.result);
           setResult(response.data.result);
