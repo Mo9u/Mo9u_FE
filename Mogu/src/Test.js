@@ -2,7 +2,7 @@ import "./Test.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import banner from "./img/banner.png";
 function Test() {
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -179,7 +179,7 @@ function Test() {
   useEffect(() => {
     async function getResult() {
       await axios
-        .get(baseUrl + `/test/0`)
+        .get(baseUrl + `/test/1`)
         .then((response) => {
           console.log(response.data.result);
           setResult(response.data.result);
@@ -197,8 +197,12 @@ function Test() {
         //시작화면
         <div className="startPageLayout">
           <div className="banner">
-            <div className="bannerText">다양한 구독 서비스로 편리해진 세상</div>
-            <div className="bannerText2">누구나 쉽게 사용할 수 있어요!</div>
+            <div className="bannerText">
+              <div className="bannerText1">대한민국 국민 10명 중 7명이 사용하고 있는</div>
+              <div className="bannerText1"> 온라인 구독 서비스!</div>
+              <div className="bannerText2">모두의 구독에서 쉽고 재밌게 추천해드려요! </div>
+            </div> 
+            <div className="bannerImg"><img src={banner} height="400px" alt="Logo" /></div>
           </div>
           <div className="testLayout">
             <div className="testTitle">나와 꼭 맞는 구독 서비스 찾기</div>

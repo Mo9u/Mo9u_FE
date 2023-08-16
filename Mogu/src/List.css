@@ -88,6 +88,9 @@ a:hover {
   cursor: pointer;
 }
 
+.swipe-page-control-button-container button {
+  all: unset;
+}
 
 select {
   all: unset;
@@ -153,8 +156,8 @@ input {
 }
 
 .desc-wrapper__swipe-item-content {
-  flex: 1 1 0;
-  position: relative;
+  flex: 1 1;
+ 
 }
 
 /*타이틀 글씨*/
@@ -162,6 +165,8 @@ input {
   position: absolute;
   left: 0;
   text-align: start;
+  margin-left: 340px;
+  margin-top: 50px;
 }
 
 .swipe-item-tag {
@@ -187,11 +192,11 @@ input {
 }
 /*부제목 글씨*/
 .swipe-item p {
-  white-space: pre;
+  font-size: 25px;
 }
 
 .swipe-item img {
-  width: 737px;
+  width: 500px;
   height: 250px;
   object-fit: contain;
 }
@@ -242,9 +247,7 @@ input {
 
 .swipe-pagination-wrapper {
   display: flex;
-  height: 4rem;
   justify-content: end;
-  border-bottom: 1px solid #e9ecef;
 }
 
 .swipe-pagination-grid-wrapper {

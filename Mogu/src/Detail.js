@@ -186,7 +186,7 @@ function Detail(props) {
                 </span>
               </div>
               <div className="average">
-                평균{" "}
+                평균 {" "}
                 {result.avgPrice
                   ?.toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}

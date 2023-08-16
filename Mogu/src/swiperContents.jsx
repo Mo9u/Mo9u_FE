@@ -1,6 +1,6 @@
 import millie from "./img/millie.png";
 import pilly from "./img/pilly.jpg";
-import yesus from "./img/yesus.jpg";
+import yesus from "./img/yesus.png";
 
 export const swiperContents = [
     {
@@ -18,11 +18,11 @@ export const swiperContents = [
             background: '#FF5C35',
     },
     {
-        title: `내일의 나를 만드는 [건강 메이트] 필리`,
-        description: `참 쉬운 건강맞춤법 필리 맞춤 영양제 정기구독 서비스`,
+        title: `버려질 위기에 처한 친환경 농산물을 구하자!`,
+        description: `자연 그대로 자란 “못난이 농산물”을 “저렴하게” 받아볼 수 있는 서비스`,
         img: yesus,
-        fontColor: '#FFFFFF',
-        background: '#FFD27D',
+        fontColor: '#000000',
+        background: '#FFD800',
     },
       
       
