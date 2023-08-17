@@ -15,7 +15,8 @@ import { getMonth, getYear } from 'date-fns';
 import "react-datepicker/dist/react-datepicker.css";
 
 function SubList () {
-    const baseUrl = "http://localhost:8090";
+    // const baseUrl = "http://localhost:8090";
+    const baseUrl = "http://27.96.135.10:8090";
 
     const [cookies, setCookies, removeCookies] = useCookies(["sessionID"]);
 
@@ -34,28 +35,29 @@ function SubList () {
     useEffect(() => {
         const fetchData = async() => {
             if(subManList.length === 0){
+                // axios.defaults.withCredentials = true;
                 axios.defaults.headers.common["Authorization"] = 
-                    `Bearer ${cookies.sessionID}`;
-                console.log(`Bearer ${cookies.sessionID}`);
+                    `Bearer ${window.localStorage.getItem("sessionID")}`;
+                console.log(`Bearer ${window.localStorage.getItem("sessionID")}`);
                 const response = await axios.get(baseUrl + "/submanages");
-                console.log(response);
-                setSubManList(response.data);
+                console.log(response.data.result);
+                setSubManList(response.data.result);
             }
         }
         fetchData();
     }, []);
 
     useEffect(() => {
-        if(totalPrice === 0){
-            subManList.map((e) => setTotalPrice((prev) => prev + e.creditPrice));
+        if(totalPrice === 0 && subManList.length !== 0){
+            subManList?.map((e) => setTotalPrice((prev) => prev + e.creditPrice));
         }
     }, [subManList]);
 
     const onModal = async (e) => {
         setIsModalOpen(true);
-        const response = await axios.get(baseUrl + "/sub/name")
+        const response = await axios.get(baseUrl + "/sub/names")
         console.log(response);
-        setSubSelectList(response.data);
+        setSubSelectList(response.data.result);
     };
 
     const onRegister = async (e) => {
@@ -65,7 +67,7 @@ function SubList () {
             "creditDate": selectedDate,
             "creditPrice": selectedPrice
         }
-        axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.sessionID}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("sessionID")}`;
         const response = await axios.post(baseUrl + "/submanages", requestData, {"Content-type": "application/json"})
         console.log(response);
     };
@@ -75,6 +77,7 @@ function SubList () {
         axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.sessionID}`;
         const response = await axios.delete(baseUrl + `/submanages/${parseInt(e.target.id)}`)
         console.log(response);
+        alert("삭제되었습니다");
     }
 
     const openCalendar = async (e) => {
@@ -82,6 +85,12 @@ function SubList () {
         setIsCalendar(!isCalendar);
     }
 
+    function formatDate (date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
     const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) - i);
     const MONTHS = [
     'January',
@@ -113,10 +122,22 @@ function SubList () {
                     </div>
                 </div>
                 <div className='sublist_main_container'>
-                    {subManList?.map((e) => (<SubManageCard data={e} onDelete={onDelete}/>))}                    
+                    {subManList?.length !== 0 
+                    ?
+                        (subManList?.map((e) => (<SubManageCard data={e} onDelete={onDelete}/>)))
+                    :
+                        (<div className='sublist_nosub_wrapper'>
+                            <img />
+                            <div className='sublist_nosub'>등록한 구독 서비스가 존재하지 않습니다.</div>
+                        </div>)
+                    }                    
                 </div>
                 <div className='sublist_total_price_wrapper'>
-                    <div className='sublist_total_price_txt'>이번 달 총 금액 : <span className='sublist_total_price'>{totalPrice}</span> 원</div>
+                    <div className='sublist_total_price_txt'>
+                        이번 달 총 금액 : <span className='sublist_total_price'>
+                            {totalPrice?.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                        </span> 원
+                    </div>
                 </div>
             </div>
             {isModalOpen && 
@@ -128,22 +149,27 @@ function SubList () {
                                 <tc className="modal_sub_title">구독 서비스</tc>
                                 <td className='modal_sub_text'>
                                     <select className="modal_select" onChange={(e) => setSelectedSub(e.target.value)}>
-                                        {subSelectList.map((e) => <option className="modal_option" value={e.subId}>{e.name}</option>)}
+                                        {subSelectList?.map((e) => <option className="modal_option" value={e.subId}>{e.name}</option>)}
                                     </select>
                                 </td>
                             </tr>
                             <tr className='modal_tr'>
                                 <tc className="modal_sub_title">결제일</tc>
                                 <td className='modal_sub_text'>
-                                    <div>
-                                        <input value={selectedDate} placeholder="2023-01-01" onChange={(e) => setSelectedDate(e.target.value)} className="modal_date_input"/>
+                                    <div className='modal_sub_text_div'>
+                                        <input value={formatDate(selectedDate)} placeholder="2023-01-01" onChange={(e) => setSelectedDate(e.target.value)} className="modal_date_input"/>
                                         <img style={{'margin-left': '50px'}} src={calendar} onClick={openCalendar}/>
                                     </div>
                                 </td>
                             </tr>
                             <tr className='modal_tr'>
                                 <tc className="modal_sub_title">결제 금액</tc>
-                                <td className='modal_sub_text'><input className="modal_input" placeholder="선택" value={selectedPrice} onChange={(e) => setSelectedPrice(e.target.value)}/></td>
+                                <td className='modal_sub_text'>
+                                    <div className='modal_sub_text_div'>
+                                        <input className="modal_input" placeholder="선택" value={selectedPrice} onChange={(e) => setSelectedPrice(e.target.value)}/>
+                                        <div className='modal_sub_texts'>원</div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                         <div className='modal_btn_wrapper'>
