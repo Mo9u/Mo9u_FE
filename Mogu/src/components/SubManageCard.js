@@ -17,7 +17,7 @@ function SubManageCard (props){
                 </div>
                 <div className='sublist_sub_name'  onClick={(e) => navigate(`/detail/${props.data.subId}`)}>{props.data.subName}</div>
                 <div className='sublist_sub_date'>매월 {props.data.creditDate[2]}일</div>
-                <div className='sublist_sub_price'>{props.data.creditPrice}원</div>
+                <div className='sublist_sub_price'>{props.data.creditPrice?.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</div>
             </div>
             <div className='sublist_delBtn' id={props.data.id} onClick={props.onDelete}>지우기</div>
         </div>
