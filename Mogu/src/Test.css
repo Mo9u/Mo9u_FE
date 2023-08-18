@@ -8,7 +8,7 @@
   font-size: 14px;
   background-color: white;
   height: calc(var(--vh, 1vh) * 100);
-  margin: 0 auto;
+  margin: 2px auto 0 auto;
   overflow: hidden;
 }
 
