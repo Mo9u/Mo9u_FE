@@ -56,7 +56,7 @@ function Nav() {
         ? 
         (
           <div className="user_wrapper">
-            <div className="user_join_usernameTxt">{userName}님 환영합니다!</div>
+            <div className="user_join_usernameTxt">{localStorage.getItem("userName")}님 환영합니다!</div>
             <div className="user_join_btn" onClick={logout}>로그아웃</div>
           </div>
         )
