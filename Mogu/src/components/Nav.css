@@ -23,9 +23,11 @@
   list-style-type: none;
   overflow: hidden;
   padding-inline-start: 0px;
+  margin-right: 20px;
 }
 
 .navbar li {
+  font-family: 'Orbit', sans-serif;
   height: 110px;
   font-size: 18px;
   white-space: nowrap;
@@ -37,7 +39,7 @@
   height: 110px;
   display: block;
   color: #6c6c6c;
-  font-size: 25px;
+  font-size: 30px;
   text-align: center;
   padding-top: 27px;
   padding-bottom: 40px;
@@ -63,6 +65,11 @@
   margin: 0 80px;
 }
 
+.user_wrapper{
+  display: flex;
+  margin: 0 40px;
+}
+
 .user_login_btn{
   width: 140px;
   height: 58px;
@@ -75,6 +82,15 @@
   line-height: 58px;
   margin: 0 20px;
   cursor: pointer;
+}
+
+.user_join_usernameTxt{
+  font-size: 30px;
+  font-weight: bold;
+  color: #000;
+  white-space: nowrap;
+  padding-top: 10px;
+  margin: 0 10px;
 }
 
 .user_join_btn{

@@ -24,7 +24,13 @@ function Join () {
     const [isAuthOk, setIsAuthOk] = useState(false); // 휴대폰 인증 여부
     
     const onCheckId = async (e) => {
-        setIsIdOk(false);
+        if(info.loginId){
+            setIsIdOk(false);
+        } else{
+            alert('아이디를 입력해주세요.');
+            return;
+        }
+        
         const response = await axios.post(baseUrl + '/user/signUp/checkId', {
             "loginId": info.loginId
         }, {"Content-Type": "application/json"})
@@ -38,9 +44,15 @@ function Join () {
     };
 
     const onAuth = async (e) => {
-        setIsAuthOpen(true);
-        setUserAuth('');
-        alert("인증번호가 전송되었습니다. 메시지를 확인하여 주세요.");
+        if(info.userTel){
+            alert("인증번호가 전송되었습니다. 메시지를 확인하여 주세요.");
+            setIsAuthOpen(true);
+            setIsAuthOk(false);
+            setUserAuth('');
+        } else{
+            alert('휴대폰 번호를 입력하세요.');
+            return;
+        }
         const response = await axios.post(baseUrl + '/user/signUp/sendSMS', {
             "phoneNumber": info.userTel
         }, {"Content-Type": "application/json"})
@@ -56,6 +68,7 @@ function Join () {
             alert("인증되었습니다.");
         } else{
             alert("인증번호가 일치하지 않습니다. 전화번호 인증을 다시 진행해주세요.");
+            setUserAuth('');
         }
     }
 
@@ -126,7 +139,7 @@ function Join () {
                     </div>
 
                     <div className='join_input_wrapper'>
-                        <div className='join_subtitle'>전화번호 인증</div>
+                        <div className='join_subtitle'>휴대폰 번호 인증</div>
                         <div className='join_btn_wrapper'>
                             <input 
                                 className='join_btn_input'  
