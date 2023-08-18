@@ -295,6 +295,7 @@
     padding: 10px;
     /* margin-top: 10px; */
     text-align: center;
+    margin: 0 auto;
 
     display: flex;
 }
@@ -306,6 +307,25 @@
     text-align: center;
 
     display: flex;
+}
+
+.modal_line{
+    background-color: #c0c0c0;
+    width: 2px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+.modal_year{
+    width: 322px;
+}
+
+.modal_month{
+    width: 171.5px;
+}
+
+.modal_day{
+    width: 171.5px;
 }
 
 .modal_btn_wrapper{
