@@ -1,7 +1,8 @@
 import './SubList.css';
 import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from "recoil";
 import SubManageCard from './components/SubManageCard';
 import axios from 'axios';
 
@@ -14,9 +15,14 @@ import DatePicker from "react-datepicker";
 import { getMonth, getYear } from 'date-fns';
 import "react-datepicker/dist/react-datepicker.css";
 
+import { LoginState } from "./states/LoginState";
+
 function SubList () {
     // const baseUrl = "http://localhost:8090";
     const baseUrl = "http://27.96.135.10:8090";
+
+    // 로그인 상태 설정
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
 
     const [cookies, setCookies, removeCookies] = useCookies(["sessionID"]);
 
@@ -25,15 +31,40 @@ function SubList () {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [subSelectList, setSubSelectList] = useState([]);
-    const [selectedSub, setSelectedSub] = useState(0);
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedSub, setSelectedSub] = useState(1);
+    const [selectedDate, setSelectedDate] = useState({
+        year: 0,
+        month: 0,
+        day: 0
+    });
     const [selectedPrice, setSelectedPrice] = useState(0);
 
     const [isCalendar, setIsCalendar] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
+
+    const M = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    const D = [];
+    for(let i = 1; i <= 31; i++){
+        D.push(i);
+    }
+    const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     const checkLogin = async () => {
+    //         if(!isLoggedIn){
+    //             alert("로그인이 필요한 서비스입니다.");
+    //             navigate("/login");
+    //         }
+    //     };
+    //     checkLogin();
+    // }, []);
 
     useEffect(() => {
         const fetchData = async() => {
+            if(!isLoggedIn){
+                alert("로그인이 필요한 서비스입니다.");
+                navigate("/login");
+                return;
+            }
             if(subManList.length === 0){
                 // axios.defaults.withCredentials = true;
                 axios.defaults.headers.common["Authorization"] = 
@@ -62,21 +93,27 @@ function SubList () {
 
     const onRegister = async (e) => {
         setIsModalOpen(false);
-        const requestData = {
-            "subId": selectedSub,
-            "creditDate": selectedDate,
-            "creditPrice": selectedPrice
+        try{
+            const requestData = {
+                "subId": parseInt(selectedSub),
+                "creditDate": "2023-" + selectedDate.month + "-" + selectedDate.day,
+                "creditPrice": parseInt(selectedPrice)
+            }
+            console.log(requestData);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("sessionID")}`;
+            const response = await axios.post(baseUrl + "/submanages", requestData, {"Content-type": "application/json"})
+            alert("추가되었습니다");
+        } catch(error){
+            alert("이미 등록된 구독 서비스입니다");
         }
-        axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("sessionID")}`;
-        const response = await axios.post(baseUrl + "/submanages", requestData, {"Content-type": "application/json"})
-        console.log(response);
     };
 
     const onDelete = async (e) => {
         console.log(e.target.id);
-        axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.sessionID}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("sessionID")}`;
         const response = await axios.delete(baseUrl + `/submanages/${parseInt(e.target.id)}`)
         console.log(response);
+        window.location.reload();
         alert("삭제되었습니다");
     }
 
@@ -84,28 +121,6 @@ function SubList () {
         console.log(e);
         setIsCalendar(!isCalendar);
     }
-
-    function formatDate (date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    }
-    const YEARS = Array.from({ length: getYear(new Date()) + 1 - 2000 }, (_, i) => getYear(new Date()) - i);
-    const MONTHS = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-    ];
 
     return(
         <div className='sublist_container'>
@@ -154,11 +169,20 @@ function SubList () {
                                 </td>
                             </tr>
                             <tr className='modal_tr'>
-                                <tc className="modal_sub_title">결제일</tc>
+                                <tc className="modal_sub_title">다음 결제일</tc>
                                 <td className='modal_sub_text'>
                                     <div className='modal_sub_text_div'>
-                                        <input value={formatDate(selectedDate)} placeholder="2023-01-01" onChange={(e) => setSelectedDate(e.target.value)} className="modal_date_input"/>
-                                        <img style={{'margin-left': '50px'}} src={calendar} onClick={openCalendar}/>
+                                        <div className='modal_year'>
+                                            2023
+                                        </div>
+                                        <div className='modal_line'></div>
+                                        <select className='modal_month' onChange={(e) => setSelectedDate((prev) => ({...prev, month: e.target.value}))}>
+                                            {M.map((e) => (<option value={parseInt(e)}>{e}</option>))}
+                                        </select>
+                                        <div className='modal_line'></div>
+                                        <select className='modal_day' onChange={(e) => setSelectedDate((prev) => ({...prev, day: e.target.value}))}>
+                                            {D.map((e) => (<option value={parseInt(e)}>{e}</option>))}
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
@@ -177,25 +201,7 @@ function SubList () {
                             <div className='modal_chkBtn' onClick={onRegister}>확인</div>
                         </div>
                     </div>
-                    {isCalendar && (
-                        <div className='datePicker_container'>
-                        <div className='datePicker_wrapper'>
-                        <DatePicker
-                            dateFormat='yyyy.MM.dd'
-                            formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 1)}
-                            showYearDropdown
-                            scrollableYearDropdown
-                            shouldCloseOnSelect
-                            yearDropdownItemNumber={100}
-                            minDate={new Date('2000-01-01')}
-                            maxDate={new Date()}
-                            selected={selectedDate}
-                            onChange={(date) => setSelectedDate(date)}
-                            className='datePicker'                          
-                        />
-                        </div>
-                        </div>
-                    )}
+                    
                 </div>
             )}
         </div>

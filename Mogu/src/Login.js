@@ -2,8 +2,11 @@ import './Login.css';
 import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from "recoil";
 import axios from 'axios';
 import user from './img/icon/user.png';
+
+import { LoginState } from "./states/LoginState";
 
 function Login () {
     const navigate = useNavigate();
@@ -17,6 +20,9 @@ function Login () {
     const baseUrl = "http://27.96.135.10:8090";
     // const baseUrl = "http://localhost:8090";
 
+    // 로그인 상태 설정
+    const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+
     const fetchData = async (e) => {
         console.log(info);
         try {
@@ -24,7 +30,8 @@ function Login () {
             console.log(response);
             if(response.status === 200){
                 setCookies("sessionID", response.data.result);
-                window.localStorage.setItem("sessionID", response.data.result);
+                localStorage.setItem("sessionID", response.data.result);
+                setIsLoggedIn(true);
                 navigate("/");
             }
         } catch (error){
@@ -38,23 +45,9 @@ function Login () {
     }
 
     const logout = async (e) => {
-        // axios.defaults.withCredentials = true;
-        // console.log(cookies.sessionID);
-        // const config = {
-        //     headers: {
-        //         "Accept": "/",
-        //         "Cache-Control": "no-cache",
-        //         "Cookie": `JSESSIONID=${cookies.sessionID}`
-        //     }
-        // };
-
-        // try{
-        //     const response = await axios.get(baseUrl + "/user/logout", config);
-        //     console.log(response);
-        // } catch (error) {
-        //     console.error(error);
-        // }
         window.localStorage.clear();
+        setIsLoggedIn(false);
+        navigate("/");
         
     }
     return(
@@ -74,6 +67,7 @@ function Login () {
                     <input 
                         className='login_input' 
                         placeholder='비밀번호'
+                        type='password'
                         value={info.loginPassword}
                         onChange={(e) => setInfo((prev) => ({...prev, "loginPassword": e.target.value}))}
                     />

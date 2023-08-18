@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Nav from "./Nav";
+import { RecoilRoot } from 'recoil';
+import Nav from "./components/Nav";
 import Test from "./Test";
 import List from "./List";
 import Detail from "./Detail";
@@ -10,6 +11,7 @@ import SubList from "./SubList";
 
 function App() {
   return (
+    <RecoilRoot>
     <BrowserRouter>
       <div className="App">
         <Nav />
@@ -58,6 +60,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+    </RecoilRoot>
   );
 }
 

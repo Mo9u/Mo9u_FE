@@ -30,6 +30,7 @@ export default function List() {
   const [subList, setSubList] = useState([]);
 
   const baseUrl = "http://27.96.135.10:8090";
+  // const baseUrl = "http://localhost:8090";
 
   const maxSlide = swiperContents.length - 1;
 
@@ -111,10 +112,10 @@ export default function List() {
 
   useEffect(() => {
     const fetchData = async (e) => {
-      if(subList.length === 0){
+      if(subList.length === 0) {
         const response = await axios.get(baseUrl + "/sub/list");
         console.log(response);
-        setSubList(response.data);
+        setSubList(response.data.result);
       }
     }
     fetchData();
