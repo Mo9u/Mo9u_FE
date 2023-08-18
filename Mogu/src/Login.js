@@ -44,6 +44,13 @@ function Login () {
         
     }
 
+    const keyData = async (e) => {
+        console.log(e.key);
+        if(e.key === 'Enter'){
+            fetchData();
+        }
+    }
+
     const logout = async (e) => {
         window.localStorage.clear();
         setIsLoggedIn(false);
@@ -63,6 +70,7 @@ function Login () {
                         placeholder='아이디' 
                         value={info.loginId}
                         onChange={(e) => setInfo((prev) => ({...prev, "loginId": e.target.value}))}
+                        onKeyDown={keyData}
                     />
                     <input 
                         className='login_input' 
@@ -70,6 +78,7 @@ function Login () {
                         type='password'
                         value={info.loginPassword}
                         onChange={(e) => setInfo((prev) => ({...prev, "loginPassword": e.target.value}))}
+                        onKeyDown={keyData}
                     />
                     <button 
                         type='button'
