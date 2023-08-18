@@ -8,8 +8,8 @@ import axios from "axios";
 function Detail(props) {
   let { id } = useParams();
 
-  // const baseUrl = "http://27.96.135.10:8090";
-  const baseUrl = "http://localhost:8090";
+  const baseUrl = "http://27.96.135.10:8090";
+  // const baseUrl = "http://localhost:8090";
 
   const [result, setResult] = useState({});
 
@@ -18,7 +18,6 @@ function Detail(props) {
       await axios
         .get(baseUrl + `/sub/${id}`)
         .then((response) => {
-          console.log(response.data.result);
           setResult(response.data.result);
         })
         .catch((error) => {

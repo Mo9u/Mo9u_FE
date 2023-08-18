@@ -114,7 +114,6 @@ export default function List() {
     const fetchData = async (e) => {
       if(subList.length === 0) {
         const response = await axios.get(baseUrl + "/sub/list");
-        console.log(response);
         setSubList(response.data.result);
       }
     }

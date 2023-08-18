@@ -179,11 +179,9 @@ function Test() {
 
   useEffect(() => {
     async function getResult() {
-      console.log(mbtiIndex);
       await axios
         .get(baseUrl + `/test/${mbtiIndex}`)
         .then((response) => {
-          console.log(response.data);
           setResult(response.data);
         })
         .catch((error) => {
