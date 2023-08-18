@@ -177,7 +177,7 @@ function Detail(props) {
           <div className="side_box">
             <div className="price_box">
               <div className="price_tag">
-                <img src={up} className="arrow" />
+                <img src={up} className="arrow"/>
                 <span>
                   최고가{" "}
                   {result.maxPrice

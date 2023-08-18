@@ -38,13 +38,55 @@
 .sublist_howuse{
     color: #6C6C6C;
     font-size: 30px;
-}
-
-.sublist_howuse img {
+  }
+  
+  .sublist_howuse img {
     vertical-align: middle;
     margin-bottom: 5px;
     margin-left: 10px;
-}
+  }
+  
+  #menu {
+    width: 300px;
+    /* margin: 0 auto; */
+    text-align: center;
+  }
+  #menu div {
+    position: relative;
+    display: inline-block;
+  }
+  
+  #menu span {
+    display: flex;
+    width: auto;
+    cursor: pointer;
+  }
+  
+  /* 말풍선 적절한 top 과 margin-left 로 위치조정 */
+  .arrow_box {
+    margin-left: -260px;
+    margin-top: 20px;
+    display: none;
+    position: absolute;
+    width: 736px;
+    padding-top: 54px;
+    padding-bottom: 54px;
+    padding-left: 46px;
+    padding-right: 46px;
+    left: 0;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 30px;
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 27px;
+    box-shadow: 1px 1px 10px #BCBCBC;
+  }
+  
+  
+  span:hover + p.arrow_box {
+    display: block;
+  }
 
 .sublist_addBtn{
     background-color: #67A2D8;
@@ -173,6 +215,8 @@
 }
 
 .sublist_total_price_wrapper{
+    /* display: flex;
+    flex: row; */
     text-align: end;
 }
 

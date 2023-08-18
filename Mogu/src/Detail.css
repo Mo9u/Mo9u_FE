@@ -72,11 +72,10 @@
 
 .tab {
   font-size: 35px;
-  color: #676767;
+  color: #000;
 }
 .tab_sub {
   margin-bottom: 30px;
-  font-weight: bold;
 }
 
 .tab_button {
@@ -196,6 +195,7 @@
   padding-bottom: 13px;
 }
 .price_tag {
+  /* display: flex; */
   font-size: 25px;
   padding: 10px;
 }
