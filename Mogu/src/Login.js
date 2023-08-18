@@ -39,6 +39,7 @@ function Login () {
                 setCookies("sessionID", response.data.result.split("/")[0]);
                 localStorage.setItem("sessionID", response.data.result.split("/")[0]);
                 setUserName(response.data.result.split("/")[1]);
+                localStorage.setItem("userName", response.data.result.split("/")[1]);
                 setIsLoggedIn(true);
                 navigate("/");
             }
