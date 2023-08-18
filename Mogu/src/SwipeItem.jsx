@@ -12,6 +12,7 @@ export default function SwipeItem({
   tagBackground,
   isActive,
   index,
+  link
 }) {
   const backgroundStyle = { backgroundColor: background };
   const fontStyle = { color: fontColor };
@@ -20,13 +21,27 @@ export default function SwipeItem({
     backgroundColor: tagBackground,
   };
 
+  const handleItemClick = (title) => {
+    if(fontColor==='black'){
+      window.location.href = `/detail/7`;
+    }
+    else if(fontColor==="#FFFFFF"){
+      window.location.href = `/detail/5`;
+    }
+    else if(fontColor==="#000000"){
+      window.location.href = `/detail/1`;
+    }
+    
+  };
+
+
   return (
     <li
       className={`swipe-item-wrapper ${
         isActive === index ? 'swipe-item-active' : ''
       }`}
       key={keyword}>
-      <a className="swipe-item" style={backgroundStyle}>
+      <a className="swipe-item" style={backgroundStyle} onClick={() => handleItemClick(title)}>
         <div className="wrapper__swipe-item-contents">
           <div className="desc-wrapper__swipe-item-content" style={fontStyle}>
             <div className="align-swipe-item-content">
