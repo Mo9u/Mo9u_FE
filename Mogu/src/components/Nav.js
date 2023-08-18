@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import "./Nav.css";
 import logo from "../img/logo.png";
 
-import { LoginState } from "../states/LoginState";
+import { LoginState, NameState } from "../states/LoginState";
 
 function Nav() {
   const location = useLocation();
@@ -13,6 +13,7 @@ function Nav() {
 
   // 로그인 상태 설정
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  const [userName, setUserName] = useRecoilState(NameState);
 
   const logout = async (e) => {
     localStorage.clear();
@@ -54,7 +55,8 @@ function Nav() {
         {isLoggedIn 
         ? 
         (
-          <div className="user_container">
+          <div className="user_wrapper">
+            <div className="user_join_usernameTxt">{userName}님 환영합니다!</div>
             <div className="user_join_btn" onClick={logout}>로그아웃</div>
           </div>
         )

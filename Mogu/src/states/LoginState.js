@@ -8,3 +8,9 @@ export const LoginState = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const NameState = atom({
+  key: "NameState",
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});

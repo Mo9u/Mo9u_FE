@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import axios from 'axios';
 import user from './img/icon/user.png';
 
-import { LoginState } from "./states/LoginState";
+import { LoginState, NameState } from "./states/LoginState";
 
 function Login () {
     const navigate = useNavigate();
@@ -22,15 +22,24 @@ function Login () {
 
     // 로그인 상태 설정
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+    const [userName, setUserName] = useRecoilState(NameState);
 
     const fetchData = async (e) => {
         console.log(info);
+        if(!info.loginId){
+            alert('아이디를 입력해주세요.');
+            return;
+        } else if(!info.loginPassword){
+            alert('비밀번호를 입력해주세요.');
+            return;
+        }
         try {
             const response = await axios.post(baseUrl + "/user/login", info, {"Content-Type": "application/json"});
             console.log(response);
             if(response.status === 200){
-                setCookies("sessionID", response.data.result);
-                localStorage.setItem("sessionID", response.data.result);
+                setCookies("sessionID", response.data.result.split("/")[0]);
+                localStorage.setItem("sessionID", response.data.result.split("/")[0]);
+                setUserName(response.data.result.split("/")[1]);
                 setIsLoggedIn(true);
                 navigate("/");
             }
