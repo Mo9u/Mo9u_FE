@@ -8,8 +8,8 @@ import axios from "axios";
 function Detail(props) {
   let { id } = useParams();
 
-  const baseUrl = "http://27.96.135.10:8090";
-  // const baseUrl = "http://localhost:8090";
+  // const baseUrl = "http://27.96.135.10:8090";
+  const baseUrl = "http://localhost:8090";
 
   const [result, setResult] = useState({});
 
@@ -64,11 +64,9 @@ function Detail(props) {
               <span>{result.name}</span>
             </div>
             <div className="sub_summary">
-              <span>다채롭고 다양한 일상을 위한</span>
+              <span>{result.simpleContent}</span>
             </div>
-            <div className="sub_summary">
-              <span>오설록만의 특별한 차 구독 서비스</span>
-            </div>
+          
           </div>
         </div>
 
