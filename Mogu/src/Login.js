@@ -25,7 +25,6 @@ function Login () {
     const [userName, setUserName] = useRecoilState(NameState);
 
     const fetchData = async (e) => {
-        console.log(info);
         if(!info.loginId){
             alert('아이디를 입력해주세요.');
             return;
@@ -35,7 +34,7 @@ function Login () {
         }
         try {
             const response = await axios.post(baseUrl + "/user/login", info, {"Content-Type": "application/json"});
-            console.log(response);
+
             if(response.status === 200){
                 setCookies("sessionID", response.data.result.split("/")[0]);
                 localStorage.setItem("sessionID", response.data.result.split("/")[0]);

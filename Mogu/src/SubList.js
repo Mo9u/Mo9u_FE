@@ -63,9 +63,7 @@ function SubList () {
                 // axios.defaults.withCredentials = true;
                 axios.defaults.headers.common["Authorization"] = 
                     `Bearer ${window.localStorage.getItem("sessionID")}`;
-                console.log(`Bearer ${window.localStorage.getItem("sessionID")}`);
                 const response = await axios.get(baseUrl + "/submanages");
-                console.log(response.data.result);
                 setSubManList(response.data.result);
             }
         }
@@ -81,26 +79,18 @@ function SubList () {
     const onModal = async (e) => {
         setIsModalOpen(true);
         const response = await axios.get(baseUrl + "/sub/names")
-        console.log(response);
+
         setSubSelectList(response.data.result);
     };
 
     const onRegister = async (e) => {
         setIsModalOpen(false);
-        console.log(selectedDate);
-        // if(parseInt(selectedDate.month) < 10){
-        //     setSelectedDate((prev) => ({...prev, month: `0${selectedDate.month}`}));
-        // }
-        // if(parseInt(selectedDate.day) < 10){
-        //     setSelectedDate((prev) => ({...prev, day: `0${selectedDate.day}`}));
-        // }
         try{
             const requestData = {
                 "subId": parseInt(selectedSub),
                 "creditDate": "2023-" + selectedDate.month + "-" + selectedDate.day,
                 "creditPrice": parseInt(selectedPrice)
             }
-            console.log(requestData);
             axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("sessionID")}`;
             const response = await axios.post(baseUrl + "/submanages", requestData, {"Content-type": "application/json"})
             alert("추가되었습니다");
@@ -112,16 +102,13 @@ function SubList () {
     };
 
     const onDelete = async (e) => {
-        console.log(e.target.id);
         axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("sessionID")}`;
         const response = await axios.delete(baseUrl + `/submanages/${parseInt(e.target.id)}`)
-        console.log(response);
         window.location.reload();
         alert("삭제되었습니다");
     }
 
     const openCalendar = async (e) => {
-        console.log(e);
         setIsCalendar(!isCalendar);
     }
 

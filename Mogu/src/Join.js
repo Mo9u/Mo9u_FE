@@ -34,7 +34,6 @@ function Join () {
         const response = await axios.post(baseUrl + '/user/signUp/checkId', {
             "loginId": info.loginId
         }, {"Content-Type": "application/json"})
-        console.log(response);
         if(response.data.code === 200){
             setIsIdOk(true);
             alert("사용 가능한 아이디입니다.");
@@ -56,7 +55,6 @@ function Join () {
         const response = await axios.post(baseUrl + '/user/signUp/sendSMS', {
             "phoneNumber": info.userTel
         }, {"Content-Type": "application/json"})
-        console.log(response);
         if(response.data.code === 200){
             setPhoneAuth(response.data.result);
         }
@@ -73,7 +71,6 @@ function Join () {
     }
 
     const posthData = async (e) => {
-        console.log(info);
         if(!info.loginId){
             alert('아이디를 입력해주세요')
             return;
@@ -89,7 +86,6 @@ function Join () {
         }
         if(isIdOk && isAuthOk){
             const response = await axios.post(baseUrl + "/user/signUp", info, {"Content-type": "application/json"});
-            console.log(response);
             if(response.data.code === 200){
                 alert("회원가입 성공!");
                 navigate("/login");
