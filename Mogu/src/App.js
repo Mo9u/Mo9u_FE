@@ -17,7 +17,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Test />} />
-          <Route
+          <Route                              
             path="/list"
             element={
               <>

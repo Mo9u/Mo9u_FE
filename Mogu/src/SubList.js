@@ -27,9 +27,9 @@ function SubList () {
     const [subSelectList, setSubSelectList] = useState([]);
     const [selectedSub, setSelectedSub] = useState(1);
     const [selectedDate, setSelectedDate] = useState({
-        year: 0,
-        month: 0,
-        day: 0
+        year: 2023,
+        month: 1,
+        day: 1
     });
     const [selectedPrice, setSelectedPrice] = useState(0);
 
@@ -124,10 +124,16 @@ function SubList () {
                 <div className='sublist_title_wrapper'>
                     <div className='sublist_title'>나의 구독 관리</div>
                     <div className='sublist_addition_wrapper'>
-
-                        <div className='sublist_howuse'>
-                            어떻게 사용하나요
-                            <img src={question} height='38px' width='38px'/>
+                        <div id="menu">
+                            <div>
+                                <span>
+                                <div className='sublist_howuse'>
+                                    어떻게 사용하나요
+                                    <img src={question} height='38px' width='38px'/>
+                                </div>
+                                </span>
+                                <p class="arrow_box">구독하고 있는 서비스를 추가하기 버튼을 눌러서 추가하면<br/>매달 결제일 하루 전 알림문자를 보내드립니다!</p>
+                            </div>
                         </div>
                         <div className='sublist_addBtn' onClick={onModal}>추가하기</div>
                     </div>

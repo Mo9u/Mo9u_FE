@@ -45,7 +45,6 @@ function Login () {
     }
 
     const keyData = async (e) => {
-        console.log(e.key);
         if(e.key === 'Enter'){
             fetchData();
         }
@@ -87,7 +86,6 @@ function Login () {
                     >로그인</button>
                 </div>
                 <div className='login_signUp'>계정이 없으신가요? <Link className='login_link' to='/join'>회원가입</Link></div>
-                <div onClick={logout}>로그아웃</div>
             </div>
         </div>
     );
