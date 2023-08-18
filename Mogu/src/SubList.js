@@ -28,8 +28,8 @@ function SubList () {
     const [selectedSub, setSelectedSub] = useState(1);
     const [selectedDate, setSelectedDate] = useState({
         year: 2023,
-        month: 1,
-        day: 1
+        month: '01',
+        day: '01'
     });
     const [selectedPrice, setSelectedPrice] = useState(0);
 
@@ -87,6 +87,13 @@ function SubList () {
 
     const onRegister = async (e) => {
         setIsModalOpen(false);
+        console.log(selectedDate);
+        // if(parseInt(selectedDate.month) < 10){
+        //     setSelectedDate((prev) => ({...prev, month: `0${selectedDate.month}`}));
+        // }
+        // if(parseInt(selectedDate.day) < 10){
+        //     setSelectedDate((prev) => ({...prev, day: `0${selectedDate.day}`}));
+        // }
         try{
             const requestData = {
                 "subId": parseInt(selectedSub),
@@ -178,11 +185,11 @@ function SubList () {
                                             2023
                                         </div>
                                         <div className='modal_line'></div>
-                                        <select className='modal_month' onChange={(e) => setSelectedDate((prev) => ({...prev, month: e.target.value}))}>
+                                        <select className='modal_month' onChange={(e) => setSelectedDate((prev) => ({...prev, month: parseInt(e.target.value) < 10 ? (`0${e.target.value}`) : e.target.value}))}>
                                             {M.map((e) => (<option value={parseInt(e)}>{e}</option>))}
                                         </select>
                                         <div className='modal_line'></div>
-                                        <select className='modal_day' onChange={(e) => setSelectedDate((prev) => ({...prev, day: e.target.value}))}>
+                                        <select className='modal_day' onChange={(e) => setSelectedDate((prev) => ({...prev, day:  parseInt(e.target.value) < 10 ? (`0${e.target.value}`) : e.target.value}))}>
                                             {D.map((e) => (<option value={parseInt(e)}>{e}</option>))}
                                         </select>
                                     </div>

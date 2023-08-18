@@ -61,6 +61,19 @@ function Join () {
 
     const posthData = async (e) => {
         console.log(info);
+        if(!info.loginId){
+            alert('아이디를 입력해주세요')
+            return;
+        } else if(!info.loginPassword){
+            alert('비밀번호를 입력해주세요');
+            return;
+        } else if(!info.userTel){
+            alert('휴대폰 번호를 입력해주세요');
+            return;
+        } else if(!info.userTel){
+            alert('이름을 입력해주세요');
+            return;
+        }
         if(isIdOk && isAuthOk){
             const response = await axios.post(baseUrl + "/user/signUp", info, {"Content-type": "application/json"});
             console.log(response);
