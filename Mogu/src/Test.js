@@ -173,6 +173,7 @@ function Test() {
  
   //백 연결
   const baseUrl = "http://27.96.135.10:8090";
+  // const baseUrl = "http://localhost:8090";
 
   const [result, setResult] = useState({});
 

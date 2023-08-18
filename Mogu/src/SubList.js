@@ -7,13 +7,7 @@ import SubManageCard from './components/SubManageCard';
 import axios from 'axios';
 
 import notification from './img/icon/notifications.png';
-import calendar from './img/calendar.png';
 import question from './img/icon/question.png';
-import pilly from './img/pilly.png';
-import { faBasketShopping } from '@fortawesome/free-solid-svg-icons';
-import DatePicker from "react-datepicker";
-import { getMonth, getYear } from 'date-fns';
-import "react-datepicker/dist/react-datepicker.css";
 
 import { LoginState } from "./states/LoginState";
 
@@ -103,7 +97,9 @@ function SubList () {
             axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("sessionID")}`;
             const response = await axios.post(baseUrl + "/submanages", requestData, {"Content-type": "application/json"})
             alert("추가되었습니다");
+            window.location.reload();
         } catch(error){
+            console.log(error);
             alert("이미 등록된 구독 서비스입니다");
         }
     };

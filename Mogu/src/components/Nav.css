@@ -57,3 +57,37 @@
   font-weight: bold;
   border-color: #ff5678;
 }
+
+.user_container{
+  display: flex;
+  margin: 0 80px;
+}
+
+.user_login_btn{
+  width: 140px;
+  height: 58px;
+  border-radius: 30px;
+  background-color: #67A2D8;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 58px;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.user_join_btn{
+  width: 140px;
+  height: 58px;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #67A2D8;
+  border: 3px solid #67A2D8;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 58px;
+  margin: 0 20px;
+  cursor: pointer;
+}

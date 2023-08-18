@@ -1,11 +1,24 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import "./Nav.css";
 import logo from "../img/logo.png";
 
+import { LoginState } from "../states/LoginState";
+
 function Nav() {
   const location = useLocation();
+  const navigate = useNavigate();
 
+  // 로그인 상태 설정
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+
+  const logout = async (e) => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    navigate("/");
+  }
   return (
     <div className="navbox">
       <div className="logo">
@@ -37,6 +50,20 @@ function Nav() {
             <Link to={"/sublist"}>나의 구독 관리</Link>
           </li>
         </ul>
+
+        {isLoggedIn 
+        ? 
+        (
+          <div className="user_container">
+            <div className="user_join_btn" onClick={logout}>로그아웃</div>
+          </div>
+        )
+        :
+        (<div className="user_container">
+          <Link to={"/login"}><div className="user_login_btn">로그인</div></Link>
+          <Link to={"/join"}><div className="user_join_btn">회원가입</div></Link>
+        </div>)
+        }
       </nav>
     </div>
   );
